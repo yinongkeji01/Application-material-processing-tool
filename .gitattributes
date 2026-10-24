@@ -1,0 +1,13 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.txt text eol=lf
+# Preserve Windows script bytes in both Git checkouts and downloaded ZIPs.
+*.bat -text whitespace=cr-at-eol
+*.ps1 -text whitespace=cr-at-eol
+*.jpg binary
+*.png binary

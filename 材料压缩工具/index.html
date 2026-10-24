@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="tool-token" content="__TOOL_TOKEN__">
+  <title>报名材料压缩工具 · 200KB</title>
+  <link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <header><div class="brand"><span class="logo">材</span><div><strong>报名材料工具</strong><span class="subtitle">PDF 转图片 / 图片压缩 / 多页合并</span></div></div><div class="local"><i></i> 本机离线处理</div></header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">为报名上传准备好每一份材料</p><h1>文件大小合规，<br>材料清晰可读。</h1><p class="lead">导入扫描件，自动生成小于 <strong>200KB</strong> 的 JPG。<br>支持 PDF、JPG、PNG，原文件保持完整。</p></div><div class="rules"><span class="rules-label">按你提供的报名要求</span><div><b>JPG / PNG</b><span>允许上传的格式</span></div><div><b>&lt; 200KB</b><span>每张图片的大小</span></div><div><b>最多 2 张</b><span>每类材料的数量</span></div></div></div>
+    <div class="workspace">
+      <section class="panel source-panel"><div class="section-heading"><h2><span class="step">01</span> 导入材料</h2><button id="clear" class="text-button" disabled>清空</button></div>
+        <label id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="选择 PDF 或图片文件"><input id="files" type="file" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" multiple hidden><span class="upload-icon">↥</span><strong>拖动文件到这里，或点击选择</strong><span>PDF / JPG / PNG · 可多选 · 单文件最多 80MB</span><small>每次最多 30 页，PDF 会自动拆分页面</small></label>
+        <div class="page-toolbar"><span id="page-count">还没有导入材料</span><button id="select-all" class="text-button" hidden>全选</button></div>
+        <div id="page-list" class="page-list"><div class="empty-source"><span>▤</span><p>学籍报告、毕业证、成绩单……<br>可以一起导入，默认按原文件分别输出。</p></div></div>
+        <p class="source-note">可勾选需要导出的页面，使用箭头调整顺序、旋转页面。</p>
+      </section>
+      <aside class="panel settings-panel"><h2><span class="step">02</span> 设置输出</h2>
+        <div id="merge-name-field" hidden><label class="field-label" for="output-name">合并后的文件名（可选）</label><input id="output-name" class="name-input" maxlength="70" placeholder="留空则自动命名"></div>
+        <span class="field-label">输出方式</span>
+        <label class="mode-card"><input type="radio" name="mode" value="files" checked><span><strong>按原文件批量输出</strong><small>每个文件生成 1 张，保留原文件名</small></span><em>默认</em></label>
+        <label class="mode-card"><input type="radio" name="mode" value="one"><span><strong>全部合并为 1 张</strong><small>跨文件合并所选页面，使用统一名称</small></span></label>
+        <label class="mode-card"><input type="radio" name="mode" value="two"><span><strong>全部分成 2 张</strong><small>所选页面按顺序均分，使用统一名称</small></span></label>
+        <label class="mode-card"><input type="radio" name="mode" value="pages"><span><strong>每页单独输出</strong><small>保留原文件名，PDF 多页追加页码</small></span></label>
+        <p class="mode-help">默认导入几个文件，就输出几张 JPG。多页 PDF 仅合并自己的页面，不与其他文件混合。</p>
+        <div class="two-fields"><div><label class="field-label" for="layout">合并布局</label><select id="layout"><option value="vertical">上下排列</option><option value="grid">双列排列</option></select></div><div><label class="field-label" for="color">色彩</label><select id="color"><option value="color">保留彩色</option><option value="gray">黑白灰度</option></select></div></div>
+        <p class="tip">证件、印章建议保留彩色。多页 PDF 请放大预览检查；需拆分某个 PDF 时，先只勾选它的页面。</p>
+        <button id="convert" class="primary" disabled>生成合规 JPG <span>→</span></button>
+        <p class="privacy">文件只在本机内存中处理，不传到互联网。</p>
+      </aside>
+    </div>
+    <div id="status" role="status" aria-live="polite" hidden></div>
+    <section id="results-section" class="panel results-panel" hidden><div class="section-heading"><div><h2><span class="step">03</span> 检查并下载</h2><p id="result-summary"></p></div><div class="save-actions"><button id="save-local" class="secondary">保存 JPG 到本机文件夹</button><button id="download-all" class="secondary">打包下载 ZIP ↓</button></div></div><div id="save-status" class="notice" hidden><span id="save-path"></span> <button id="open-folder" class="text-button">打开文件夹 ↗</button></div><div id="quantity-warning" class="notice" hidden></div><div id="results" class="results"></div><p class="result-note">点击图片放大检查文字。可直接保存到本机文件夹，也可通过浏览器下载。报名系统只需上传 .jpg 文件；ZIP 请先解压。</p></section>
+  </main>
+  <footer><span>所有输出均实际校验字节数，严格小于 200,000 字节。</span><button id="shutdown" class="text-button">退出工具</button></footer>
+</div>
+<dialog id="preview"><div class="preview-bar"><span id="preview-title"></span><button id="close-preview" class="secondary">关闭预览 ✕</button></div><p>图片按实际像素展示，可滚动查看并检查小字。</p><div class="preview-scroll"><img id="preview-image" alt="输出图片原尺寸预览"></div></dialog>
+</body></html>

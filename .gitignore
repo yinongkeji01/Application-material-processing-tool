@@ -1,0 +1,29 @@
+# User documents and generated output must stay on the user's machine.
+**/导出结果/
+tmp/
+output/
+uploads/
+*.[pP][dD][fF]
+*.[jJ][pP][gG]
+*.[jJ][pP][eE][gG]
+*.[pP][nN][gG]
+*.[zZ][iI][pP]
+!docs/images/*.jpg
+!docs/images/*.png
+
+# Local Python environments, caches and machine configuration.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
